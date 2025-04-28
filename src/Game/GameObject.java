@@ -1,13 +1,15 @@
 package Game;
 
 public abstract class GameObject {
-    public int x;
-    public int y;
+    protected int x, y;
+    protected int width, height;
 
     //Constructor that initializes x and y
-    public GameObject(int x, int y) {
+    public GameObject(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
+        this.width = width;//Updated from last week
+        this.height = height;
     }
 
     //Abstract method for subclasses
@@ -18,19 +20,17 @@ public abstract class GameObject {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    //Updated to add with and height
+    public int getWidth() { 
+        return width; 
     }
 
-    public String getPosition() {
-        return "(" + x + ", " + y + ")";
+    public int getHeight() {
+         return height; 
     }
-}
+} 
+

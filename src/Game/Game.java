@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    //Removed Score for now, if time may add coin collecting to the game, right now score serves no purpose
-    private int level; 
     private boolean isGameOver;  
     private Player player;
     private List<Obstacle> obstacleList;
@@ -14,7 +12,6 @@ public class Game {
     public Game(Player player) {
         this.player = player;
         this.obstacleList = new ArrayList<>();
-        this.level = 1;  
         this.isGameOver = false;
     }
 
@@ -24,18 +21,30 @@ public class Game {
         spawnObstacles();
     }
 
-    //End game
     public void endGame() {
         System.out.println("Game over!");
         isGameOver = true;
+        GameApp.gameOver();
     }
+    
 
-    //Add obstacles at pre set locations on map
     public void spawnObstacles() {
-        obstacleList.add(new Obstacle(10, 0, 2, 2));  
-        obstacleList.add(new Obstacle(20, 0, 2, 2));
-    }
-
+        obstacleList = new ArrayList<>();
+    
+        //Add starting platform
+        Obstacle startingPlatform = new Obstacle(50, 550, 200, 20);
+        obstacleList.add(startingPlatform);
+    
+        //Add 10 platforms
+        for (int i = 0; i < 10; i++) { 
+            int x = 300 + i * 150;
+            int y = 300 + (int)(Math.random() * 150) - 75; 
+            
+            Obstacle obstacle = new Obstacle(x, y, 100, 20);
+            obstacleList.add(obstacle);
+        }
+    }    
+    
     public void updateGameState() {
         if (isGameOver) {
             return; 
@@ -54,8 +63,8 @@ public class Game {
         return isGameOver;
     }
 
-    //Returns level, (will delete if I don't make a 2nd level)
-    public int getLevel() {
-        return level;
+    public List<Obstacle> getObstacleList() {
+        return obstacleList;
     }
+    
 }

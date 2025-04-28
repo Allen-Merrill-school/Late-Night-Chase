@@ -1,0 +1,16 @@
+{
+    "type": "java",
+    "name": "Launch GameApp",
+    "request": "launch",
+    "mainClass": "Game.GameApp",
+    "vmArgs": "--module-path /Users/allenmerrill/Downloads/javafx-sdk-21.0.7/lib --add-modules javafx.controls,javafx.fxml",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "GameApp",
+            "request": "launch",
+            "mainClass": "Game.GameApp",
+            "projectName": "Late Night Chase_8da91211"
+        }
+    ]
+}

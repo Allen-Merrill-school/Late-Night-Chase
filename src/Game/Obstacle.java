@@ -1,26 +1,19 @@
 package Game;
 
 public class Obstacle extends GameObject {
-    private int width;
-    private int height;
-
-    //Constructor for Obstacle class
+    //Construcotr
     public Obstacle(int x, int y, int width, int height) {
-        //Call on abstract class
-        super(x, y); 
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height);//Changed for jumping
     }
 
     //Basic collision check
     public boolean collide(Player player) {
-        return player.getX() < this.x + width &&
-               player.getX() + 1 > this.x &&
-               player.getY() < this.y + height &&
-               player.getY() + 1 > this.y;
+        return player.getX() < this.x + this.width &&
+               player.getX() + player.getWidth() > this.x &&
+               player.getY() < this.y + this.height &&
+               player.getY() + player.getHeight() > this.y;
     }
 
-    //Moving obstacles
     @Override
     public void move() {
     }
