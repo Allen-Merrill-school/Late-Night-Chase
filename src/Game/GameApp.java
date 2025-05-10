@@ -78,7 +78,7 @@ public class GameApp extends Application {
         playerRect.setLayoutY(player.getY());
         gameRoot.getChildren().add(playerRect);
 
-        //Spawn platforms
+        //SPawn platforms
         game.spawnObstacles(); 
         obstacles = game.getObstacleList(); 
 
@@ -91,18 +91,7 @@ public class GameApp extends Application {
 
         //Background
         Scene gameScene = new Scene(gameRoot, 800, 800, Color.BLACK);
-       
-        //Set scene dimensions in Game
-        game.setSceneWidth(gameScene.getWidth());
-        game.setSceneHeight(gameScene.getHeight());
 
-        gameScene.widthProperty().addListener((obs, oldVal, newVal) -> {
-        game.setSceneWidth(newVal.doubleValue());
-        });
-        gameScene.heightProperty().addListener((obs, oldVal, newVal) -> {
-        game.setSceneHeight(newVal.doubleValue());
-        });
-        
         //Movement
         gameScene.setOnKeyPressed(e -> {
             KeyCode code = e.getCode();
@@ -154,26 +143,6 @@ public class GameApp extends Application {
 
     public static void gameOver() {
         gameOver = true;
-    }
-
-    public static void winGame() {
-        gameOver = true;
-        instance.showWinScreen();
-    }
-
-    public void showWinScreen() {
-        Label winLabel = new Label("Congratulations! You made it!");
-        winLabel.setStyle("-fx-font-size: 36px; -fx-text-fill: white;");
-    
-        Button menuButton = new Button("Back to Menu");
-        menuButton.setOnAction(e -> showMainMenu());
-    
-        VBox layout = new VBox(20, winLabel, menuButton);
-        layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: black;");
-    
-        Scene winScene = new Scene(layout, 800, 600);
-        primaryStage.setScene(winScene);
     }
 
     //Retry if fall
