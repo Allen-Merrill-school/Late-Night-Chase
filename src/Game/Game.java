@@ -7,6 +7,9 @@ public class Game {
     private boolean isGameOver;  
     private Player player;
     private List<Obstacle> obstacleList;
+    private double sceneWidth;
+    private double sceneHeight;
+
 
     //Constructor, also initilaze player and obstacles
     public Game(Player player) {
@@ -14,6 +17,14 @@ public class Game {
         this.obstacleList = new ArrayList<>();
         this.isGameOver = false;
     }
+
+    public void setSceneWidth(double width) {
+        this.sceneWidth = width;
+    }
+    
+    public void setSceneHeight(double height) {
+        this.sceneWidth = height;
+    }  
 
     //Start game
     public void startGame() {
@@ -26,7 +37,12 @@ public class Game {
         isGameOver = true;
         GameApp.gameOver();
     }
-    
+
+    public void winGame() {
+        System.out.println("You reached the final platform. Congrats!");
+        isGameOver = true;
+        GameApp.winGame();
+    }
 
     public void spawnObstacles() {
         obstacleList = new ArrayList<>();
@@ -46,19 +62,32 @@ public class Game {
     }    
     
     public void updateGameState() {
-        if (isGameOver) {
-            return; 
+        if (isGameOver) return;
+    
+        //Check for win first
+        if (player.getX() + player.getWidth() >= sceneWidth - 10) {
+            isGameOver = true;
+            GameApp.winGame();
+            return;
         }
-
-        //Check for collisions to end game and exit loop
+    
+        //Then check if player fell off the bottom
+        if (player.getY() > sceneHeight) {
+            isGameOver = true;
+            GameApp.gameOver();
+            return;
+        }
+    
+        //Check obstacle collisions
         for (Obstacle o : obstacleList) {
             if (player.isCollidingWithObstacle(o)) {
-                endGame();  
-                break; 
+                isGameOver = true;
+                GameApp.gameOver();
+                break;
             }
         }
     }
-
+    
     public boolean isGameOver() {
         return isGameOver;
     }
